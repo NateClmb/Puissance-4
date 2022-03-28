@@ -5,6 +5,7 @@ class Plateau :
         self.tour = 0
 
     def jeu_possible(self):
+        """à modifier"""
         for i in range(35,42):
             if self.get_case(i) == 0 :
                 return True
