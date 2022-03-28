@@ -30,6 +30,11 @@ class Plateau :
                     break
                 val -= avancement[z]
                 VictoiresPossibles[z]+=1
+        
+        for x in VictoiresPossibles :
+            if x>= 3:
+                return True
+        return False
 
 
     def get_case(x):
