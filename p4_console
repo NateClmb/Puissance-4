@@ -1,0 +1,28 @@
+class Plateau:
+    get_case()
+    victoire()
+    jeu_possible()
+
+
+class console:
+
+    def __init__(self):
+        self.plateau = Plateau()
+
+    def jeu(self,colonne): 
+        case = colonne
+        self.plateau.get_case(case)
+        while self.plateau.get_case(case) > 0:
+            case += 7
+
+
+def lancerJeu():
+    gagner = False
+    while not gagner:
+        joueurTour = self.plateau.tour % 2
+        print("C'est au joueur"+joueurTour+"de jouer !")
+        colonne = input("Dans quelle colonne voulez-vous jouer ?")
+        case = jeu(joueurTour,colonne) 
+        jeu()
+        afficher()
+        gagner = self.plateau.victoire(case)
