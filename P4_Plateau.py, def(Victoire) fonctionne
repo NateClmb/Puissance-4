@@ -1,19 +1,40 @@
 class Plateau :
+    '''
+    Cette classe est composée de 3 méthodes (__init__, jeu_possible, et get_case) 
+    Permet de faire exister un jeu de Puissance 4 fonctionnel
+    '''
+
 
     def __init__(self):
+        '''
+        Créer le plateau de 42 case 'vide' (égale à 0) et initialise le jeu en mettant un compteur tour à 0
+        Pour ajouter des pions il faudra modifier la case (1 pour rouge, 2 pour jaune)
+        '''
         self.plateau=[0]*42
         self.tour = 0
 
     def jeu_possible(self):
+        '''
+        Scanne le plateau, renvoie True si il y a au moins 1 case 'vide' (égale à 0), 
+        renvoie False si toutes les cases sont pleines
+        '''
         for i in range(35,42):
             if self.get_case(i) == 0 :
                 return True
         return False
 
-        
+    def get_case(self, x):
+        '''
+        Renvoie la valeur x de la case. On ne prend pas en compte les lignes et les colonnes,
+        on compte les cases de 0 à 41 et retourne la valeur correspondante
+        '''
+        return self.plateau[x]
+
+
     def Victoire(self, x=int()):
-        """Vérifie si victoire.
-        A voir si ca marche
+        """
+        entrée : x=int() entre 0 et 41, correspond à la case ou l'on veut vérifier si elle permet une victoire
+        sortie : Booléen, True = victoire.
         """
         avancement = [1,6,7,8]
         VictoiresPossibles = [0,0,0,0]
@@ -39,11 +60,15 @@ class Plateau :
         for x in VictoiresPossibles :
             if x>= 3:
                 return True
-        return VictoiresPossibles
+        return False
 
-
-    def get_case(self,x):
-       return self.plateau[x]
+    def jeu(self,colonne):
+        case = colonne
+        ligne = 0
+        while self.get_case(case)!=0:
+            case +=7
+            ligne +=1
+        return ligne  
 
 if __name__=="__main__":
     jeu = Plateau()
