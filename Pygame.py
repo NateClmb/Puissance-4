@@ -6,9 +6,9 @@ white = [255, 255, 255]
 
 
 screen.fill(white)
-jetonRouge = pygame.image.load("/home/castainl/Documents/nsi/puissance9/pion_rouge.png")
-jetonJaune = pygame.image.load("/home/castainl/Documents/nsi/puissance9/pion_jaune.png")
-plateau = pygame.image.load("/home/castainl/Documents/nsi/puissance9/plateau.png")
+jetonRouge = pygame.image.load("/home/colomban/Documents/NSI/Puissance4/modules/jeton-rouge.png")
+jetonJaune = pygame.image.load("/home/colomban/Documents/NSI/Puissance4/modules/jeton-jaune.png")
+plateau = pygame.image.load("/home/colomban/Documents/NSI/Puissance4/modules/plateau.png")
 screen.blit(plateau, (0, 0))
 pygame.display.flip()
 
