@@ -31,25 +31,26 @@ class Plateau :
         return self.plateau[x]
 
 
-    def Victoire(self, x=int()):
+    def victoire(self, x=int()):
         """
         entrée : x=int() entre 0 et 41, correspond à la case ou l'on veut vérifier si elle permet une victoire
-        sortie : Booléen, True = victoire.
+        sortie : Booléen==victoire.
         """
         avancement = [1,6,7,8]
         VictoiresPossibles = [0,0,0,0]
         Valeur = self.plateau[x]
         for z in range(4):
-            val = x+avancement[z]
+
+            val = x
             while self.get_case(val) ==Valeur:
-                if not (val<42 and (val%7>=x%7 or z==1 and val%7<=x) and val>0):
+                if not (val<42 and (val%7>=x%7 or z==1 and val%7<=x%7) and val>0):
                     break
                 val += avancement[z]
                 VictoiresPossibles[z]+=1
-            val = x-avancement[z]
 
+            val = x
             while self.get_case(val) ==Valeur:
-                if not (val<42 and (val%7<= x%7 or z==3 and val%7<=x) and val>0):
+                if not (val<42 and (val%7<= x%7 or z==3 and val%7<=x%7) and val>0):
                     break
                 val -= avancement[z]
                 if z%2 ==1:
@@ -58,17 +59,36 @@ class Plateau :
                     VictoiresPossibles[z]+=1
         
         for x in VictoiresPossibles :
-            if x>= 3:
+            if x>= 4:
                 return True
         return False
 
     def jeu(self,colonne):
+        """
+        entrée : la colonne sur laquelle on veut jouer
+        sortie : la ligne où jouer 
+        """
         case = colonne
         ligne = 0
-        while self.get_case(case)!=0:
-            case +=7
-            ligne +=1
-        return ligne  
+        if self.getcase(5*7+colonne)!=0 :
+            return -1
+        else :
+            while self.get_case(case)!=0 and ligne<6:
+                case +=7
+                ligne +=1
+            return ligne
+
+    def jouer(self, case=int(), ):
+        """
+        entrée : la case et la valeur que l'on veut mettre dans le puissance 4 (1=Joueur1; 2=Joueur2; 0=vide)
+        sortie : rien
+        """
+        self.plateau[case]= self.quijoue()
+        self.tour +=1
+    
+    def quijoue(self):
+        return self.tour%2 +1
+
 
 if __name__=="__main__":
     jeu = Plateau()
