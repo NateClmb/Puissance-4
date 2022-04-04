@@ -1,3 +1,4 @@
+
 class Console:
     '''
     Régit les interactions entre la console et les joueurs
@@ -6,29 +7,27 @@ class Console:
 
     def __init__(self):
         self.lejeu = Plateau()
-        self.tourJoueur = (self.lejeu.tour % 2)+1
 
     def jouer(self):
         '''
         Permets de modifier dans le puissance 4 les valeurs du tableau
         '''
-
-        colonne = input('Dans quelle colonne voulez-vous jouer ?')
+        colonne = int(input('Entrez la colonne dans laquelle vous voulez jouer : '))-1
         ligne = self.lejeu.jeu(colonne)
-        self.lejeu.plateau[ligne*7 + colonne] = self.tourJoueur
-
-    def qui_joue(self):
-        '''
-        Renvoie le numéro du joueur qui doit jouer : 1 ou 2
-        '''
-        return self.tourJoueur
+        if ligne ==-1 :
+            print("ah")
+            return False
+        self.lejeu.jouer(colonne+ligne*7)
+        return ligne
+    
+    def quijoue(self):
+        return self.joueurtour
         
-
     def afficher(self):
         '''
         Affiche dans la console le jeu Puissance 4
         '''
-        for x in range(6):
+        for x in range(5,-1,-1):
             for y in range(7):
                 Jeton = " "
                 if self.lejeu.get_case(x*7 +y)==1:
@@ -37,10 +36,6 @@ class Console:
                     Jeton = "O"
                 print("|"+Jeton, end= '')
             print("")
-
-        
-        
-        
 Onjoue = Console()
 Onjoue.afficher()
 
