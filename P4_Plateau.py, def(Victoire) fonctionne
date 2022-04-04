@@ -42,15 +42,15 @@ class Plateau :
         for z in range(4):
 
             val = x
-            while self.get_case(val) ==Valeur:
-                if not (val<42 and (val%7>=x%7 or z==1 and val%7<=x%7) and val>0):
+            while (val<42 and (val%7>=x%7 or z==1 and val%7<=x%7) and val>0):
+                if not not self.get_case(val) ==Valeur:
                     break
                 val += avancement[z]
                 VictoiresPossibles[z]+=1
 
             val = x
-            while self.get_case(val) ==Valeur:
-                if not (val<42 and (val%7<= x%7 or z==3 and val%7<=x%7) and val>0):
+            while (val<42 and (val%7<= x%7 or z==3 and val%7<=x%7) and val>0):
+                if not self.get_case(val) ==Valeur:
                     break
                 val -= avancement[z]
                 if z%2 ==1:
@@ -59,7 +59,7 @@ class Plateau :
                     VictoiresPossibles[z]+=1
         
         for x in VictoiresPossibles :
-            if x>= 4:
+            if x>= 5:
                 return True
         return False
 
