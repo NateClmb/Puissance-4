@@ -40,4 +40,3 @@ def lancerJeu():
         
 Onjoue = Console()
 Onjoue.afficher()
-
