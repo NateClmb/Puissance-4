@@ -1,0 +1,29 @@
+    def victoire(self, x=int()):
+        """
+        entrée : x=int() entre 0 et 41, correspond à la case ou l'on veut vérifier si elle permet une victoire
+        sortie : Booléen, True = victoire.
+        """
+        avancement = [1,6,7,8]
+        VictoiresPossibles = [0,0,0,0]
+        Valeur = self.plateau[x]
+        for z in range(4):
+            val = x+avancement[z]
+            while val<42 and (val%7>=x%7 or z==1 and val%7<=x%7) and val>-1 and (val//7>x//7 or z==0):
+                if not self.get_case(val) ==Valeur:
+                    break
+                val += avancement[z]
+                VictoiresPossibles[z]+=1
+
+            val = x-avancement[z]
+            while val<42 and (val%7<= x%7 or z==1 and val%7>x%7) and val>=0 and (val//7<x//7 or z==0):
+                if not self.get_case(val) ==Valeur:
+                    break
+                val -= avancement[z]
+                VictoiresPossibles[z]+=1
+        
+        for x in VictoiresPossibles :
+            if x>= 3:
+                return True
+        return False
+        
+#désolé j'ai fait que de me gourer, celui là est sensé être bon
