@@ -1,9 +1,9 @@
 import sys
 import pygame
-from p4_plateau import *
+from puissance9 import *
 
 
-P4 = Plateau()
+P4 = Console()
 pygame.init()
 pygame.font.init()
 
@@ -12,10 +12,12 @@ screen = pygame.display.set_mode([950, 590])
 playing_screen = pygame.Surface((692, 590))
 info_screen = pygame.Surface((692, 200))
 info_screen.fill((0, 0, 0))
+myfont = pygame.font.SysFont('VCR OSD Mono', 30)
+mymediumfont = pygame.font.SysFont('VCR OSD Mono', 20)
+mylittlefont = pygame.font.SysFont('VCR OSD Mono', 13)
 pygame.display.set_caption("Puissance 4")
 
-white = [255, 255, 255]
-black = [0, 0, 0]
+
 
 #Pour ce code, nous utilisons 3 images : le plateau, le pion rouge et le pion jaune, il faut donc au préalable les télécharger
 #Vous les retrouverez sur CheekyNate/Puissance-4.
@@ -26,7 +28,14 @@ plateau = pygame.image.load(sys.path[0] + "/plateau.png")
 playing_screen.blit(plateau, (0, 0))
 screen.blit(playing_screen, (0, 0))
 screen.blit(info_screen, (693, 591))
+screen.blit(myfont.render("Puissance 4", True, (255, 255, 255)), (720, 50))
+screen.blit(mylittlefont.render("-> Au tour du joueur rouge", True, (255, 255, 255)), (710, 200))
+screen.blit(mylittlefont.render("   Au tour du joueur jaune", True, (255, 255, 255)), (710, 250))
+
 pygame.display.flip()
+
+
+
 done = False
 while not done:
     for event in pygame.event.get():
@@ -51,19 +60,43 @@ while not done:
                 colonne = 6
             
             lignedejeu = P4.jouer(colonne)
+
+            if P4.qui_joue() == 1:
+                screen.fill(pygame.Color("black"), (710, 200, 710, 200))
+                screen.fill(pygame.Color("black"), (710, 200, 710, 250))
+                screen.fill(pygame.Color("black"), (710, 400, 710, 400))
+                screen.fill(pygame.Color("black"), (710, 450, 710, 450))
+                screen.blit(mylittlefont.render("-> Au tour du joueur rouge", True, (255, 255, 255)), (710, 200))
+                screen.blit(mylittlefont.render("   Au tour du joueur jaune", True, (255, 255, 255)), (710, 250))
+                pygame.display.flip()
+            if P4.qui_joue() == 2:
+                screen.fill(pygame.Color("black"), (710, 200, 710, 200))
+                screen.fill(pygame.Color("black"), (710, 200, 710, 250))
+                screen.fill(pygame.Color("black"), (710, 400, 710, 400))
+                screen.fill(pygame.Color("black"), (710, 450, 710, 450))
+                screen.blit(mylittlefont.render("   Au tour du joueur rouge", True, (255, 255, 255)), (710, 200))
+                screen.blit(mylittlefont.render("-> Au tour du joueur jaune", True, (255, 255, 255)), (710, 250))
+                pygame.display.flip()
+                    
             if lignedejeu==-1 :
-                print("bonjour")
+                screen.blit(mymediumfont.render("  Plus de place", True, (255, 0, 0)), (710, 400))
+                screen.blit(mymediumfont.render("sur cette colonne !", True, (255, 0, 0)), (710, 425))
+                pygame.display.flip()
+
             else :
                 if P4.qui_joue() == 1:
                     screen.blit(jetonJaune, (16 + 97 * colonne, 13 - 97.5 * lignedejeu + 486))
+                    
                     pygame.display.flip()
 
-                if P4.qui_joue() == 2:
+                if P4.qui_joue() == 2:  
                     screen.blit(jetonRouge, (16 + 97 * colonne, 13 - 97.5 * lignedejeu + 486))
                     pygame.display.flip()
-            if P4.victoire(lignedejeu*7+colonne) :
+            if P4.lejeu.victoire(lignedejeu*7+colonne) :
                 print('tamere')
 
-            if not P4.jeu_possible():
+            if P4.lejeu.jeu_possible():
+                print("personne n'a gagné bande de nubs")
 
-                print('cest fini')
+
+
