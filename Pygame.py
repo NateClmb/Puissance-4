@@ -1,9 +1,9 @@
 import sys
 import pygame
-from puissance9 import *
+from p4_plateau import *
 
 
-P4 = Console()
+P4 = Plateau()
 pygame.init()
 pygame.font.init()
 
@@ -61,5 +61,9 @@ while not done:
                 if P4.qui_joue() == 2:
                     screen.blit(jetonRouge, (16 + 97 * colonne, 13 - 97.5 * lignedejeu + 486))
                     pygame.display.flip()
-            if P4.lejeu.victoire(lignedejeu*7+colonne) :
+            if P4.victoire(lignedejeu*7+colonne) :
                 print('tamere')
+
+            if not P4.jeu_possible():
+
+                print('cest fini')
