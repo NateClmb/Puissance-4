@@ -92,11 +92,36 @@ while not done:
                 if P4.qui_joue() == 2:  
                     screen.blit(jetonRouge, (16 + 97 * colonne, 13 - 97.5 * lignedejeu + 486))
                     pygame.display.flip()
-            if P4.lejeu.victoire(lignedejeu*7+colonne) :
-                print('tamere')
 
-            if P4.lejeu.jeu_possible():
-                print("personne n'a gagné bande de nubs")
+            if P4.lejeu.victoire(lignedejeu*7+colonne) :
+                if P4.qui_joue() == 1:
+                    screen.fill(pygame.Color("black"), (710, 200, 710, 200))
+                    screen.fill(pygame.Color("black"), (710, 200, 710, 250))
+                    screen.fill(pygame.Color("black"), (710, 400, 710, 400))
+                    screen.fill(pygame.Color("black"), (710, 450, 710, 450))
+                    screen.blit(mymediumfont.render("Le joueur Jaune", True, (255, 255, 0)), (720, 250))
+                    screen.blit(mymediumfont.render("  a gagné ! GG", True, (255, 255, 0)), (720, 275))
+                    pygame.display.flip()
+                if P4.qui_joue() == 2:
+                    screen.fill(pygame.Color("black"), (710, 200, 710, 200))
+                    screen.fill(pygame.Color("black"), (710, 200, 710, 250))
+                    screen.fill(pygame.Color("black"), (710, 400, 710, 400))
+                    screen.fill(pygame.Color("black"), (710, 450, 710, 450))
+                    screen.blit(mymediumfont.render("Le joueur Rouge", True, (255, 0, 0)), (720, 250))
+                    screen.blit(mymediumfont.render("  a gagné ! GG", True, (255, 0, 0)), (720, 275))
+                    pygame.display.flip()
+
+            if not P4.lejeu.jeu_possible():
+
+                screen.fill(pygame.Color("black"), (710, 200, 710, 200))
+                screen.fill(pygame.Color("black"), (710, 200, 710, 250))
+                screen.fill(pygame.Color("black"), (710, 400, 710, 400))
+                screen.fill(pygame.Color("black"), (710, 450, 710, 450))
+                screen.blit(myfont.render("Personne n'a", True, (255, 255, 255)), (710, 250))
+                screen.blit(myfont.render("   gagné", True, (255, 255, 255)), (710, 275))
+                screen.blit(myfont.render(" On rejoue?", True, (255, 255, 255)), (710, 300))
+                pygame.display.flip()
+                
 
 
 
