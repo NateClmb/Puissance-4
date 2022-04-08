@@ -69,6 +69,7 @@ class Plateau :
             return ligne
         else : 
             return -1
+            
     def jouer(self,colonne):
         ligne = self.jeu(colonne)
         if ligne ==-1:
@@ -78,8 +79,16 @@ class Plateau :
             self.plateau[case]= self.tour%2 +1
             self.tour+=1
             return ligne
+            
     def qui_joue(self):
         return self.tour%2 +1
+
+    def reset(self):
+        '''
+        Methode dangereuse : reset tout le plateau
+        '''
+        self.plateau=[0]*42
+        self.tour = 0
         
 if __name__=="__main__":
     jeu = Plateau()
@@ -90,3 +99,18 @@ if __name__=="__main__":
                   0, 2, 0, 0, 0, 1, 1, 
                   2, 0, 0, 0, 0, 1, 1]
     print(jeu.victoire(35))
+
+
+"""
+[1,6,7,8]
+ 0, 0, 0, 0, 0, 0, 0]
+ 0, 0, 0, 0, 0, 0, 0, 
+ 1, 0, 0, 2, 1, 0, 0,
+ 0, 0, 2, 0, 1, 1, 0, 
+ 0, 0, 0, 0, 0, 1, 1,
+ [1, 0, 0,1 ,0 , 0, 1,
+"""
+    
+
+
+
