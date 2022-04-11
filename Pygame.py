@@ -1,12 +1,11 @@
 import sys
 import pygame
-from puissance9 import *
+from p4_plateau import *
 
 
 def init():
 
-
-    P4 = Console()
+    P4 = Plateau()
     pygame.init()
     pygame.font.init()
 
@@ -19,9 +18,9 @@ def init():
     mymediumfont = pygame.font.SysFont('VCR OSD Mono', 20)
     mylittlefont = pygame.font.SysFont('VCR OSD Mono', 13)
     pygame.display.set_caption("Puissance 4")
-    jetonRouge = pygame.image.load(sys.path[0] + "/pion_rouge.png")
-    jetonJaune = pygame.image.load(sys.path[0] + "/pion_jaune.png")
-    plateau = pygame.image.load(sys.path[0] + "/plateau.png")
+    jetonRouge = pygame.image.load(sys.path[0] + "/PionRouge.png")
+    jetonJaune = pygame.image.load(sys.path[0] + "/PionJaune.png")
+    plateau = pygame.image.load(sys.path[0] + "/Grille.png")
     playing_screen.blit(plateau, (0, 0))
     screen.blit(playing_screen, (0, 0))
     screen.blit(info_screen, (693, 591))
@@ -93,7 +92,7 @@ while not done:
                     screen.blit(jetonRouge, (16 + 97 * colonne, 13 - 97.5 * lignedejeu + 486))
                     pygame.display.flip()
 
-            if P4.lejeu.victoire(lignedejeu*7+colonne) :
+            if P4.victoire(lignedejeu*7+colonne) :
                 if P4.qui_joue() == 1:
                     screen.fill(pygame.Color("black"), (710, 200, 710, 200))
                     screen.fill(pygame.Color("black"), (710, 200, 710, 250))
@@ -135,8 +134,7 @@ while not done:
                                 screen, playing_screen, info_screen, myfont, mymediumfont, mylittlefont, P4, jetonRouge, jetonJaune = init()
 
                         
-
-            if not P4.lejeu.jeu_possible():
+            if not P4.jeu_possible():
 
                 screen.fill(pygame.Color("black"), (710, 200, 710, 200))
                 screen.fill(pygame.Color("black"), (710, 200, 710, 250))
@@ -147,6 +145,3 @@ while not done:
                 screen.blit(myfont.render(" On rejoue?", True, (255, 255, 255)), (710, 300))
                 pygame.display.flip()
                 
-
-
-
